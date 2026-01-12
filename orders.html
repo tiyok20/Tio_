@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan | ShopKu</title>
+
+<style>
+:root{
+    --primary:#4f46e5;
+    --dark:#1f2937;
+    --gray:#6b7280;
+    --light:#f9fafb;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:var(--light);
+    padding:40px 20px;
+    color:var(--dark);
+}
+
+/* CONTENT */
+.container{
+    max-width:600px;
+    margin:auto;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+/* ORDER LIST */
+.order{
+    background:#fff;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.order span{
+    font-size:15px;
+}
+
+.order button{
+    padding:8px 18px;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+/* ======================
+   SUCCESS ANIMATION (SAMA)
+   ====================== */
+#successOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.4s;
+    z-index:999;
+}
+
+#successOverlay.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.success-box{
+    background:#fff;
+    padding:40px 30px;
+    border-radius:20px;
+    text-align:center;
+    width:300px;
+    animation:pop .5s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(.6);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+.checkmark svg{
+    width:80px;
+    height:80px;
+    stroke:var(--primary);
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    fill:none;
+}
+
+.checkmark circle{
+    stroke-dasharray:157;
+    stroke-dashoffset:157;
+    animation:circle .6s forwards;
+}
+
+.checkmark path{
+    stroke-dasharray:48;
+    stroke-dashoffset:48;
+    animation:check .4s .6s forwards;
+}
+
+@keyframes circle{
+    to{stroke-dashoffset:0}
+}
+
+@keyframes check{
+    to{stroke-dashoffset:0}
+}
+
+.success-box h3{
+    margin-top:20px;
+    font-size:20px;
+}
+
+.success-box p{
+    font-size:14px;
+    color:var(--gray);
+    margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Riwayat Pesanan</h2>
+
+    <div class="order">
+        <span>Produk A — <b>Selesai</b></span>
+        <button onclick="showSuccess()">Detail</button>
+    </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div id="successOverlay">
+    <div class="success-box">
+        <div class="checkmark">
+            <svg viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="25"/>
+                <path d="M14 27l7 7 17-17"/>
+            </svg>
+        </div>
+        <h3>Pesanan Selesai</h3>
+        <p>Terima kasih telah berbelanja di ShopKu</p>
+    </div>
+</div>
+
+<script>
+function showSuccess(){
+    document.getElementById('successOverlay').classList.add('show');
+}
+</script>
+
+</body>
+</html>

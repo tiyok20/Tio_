@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | ShopKu</title>
+
+<style>
+:root{
+    --primary:#4f46e5;
+    --dark:#1f2937;
+    --gray:#6b7280;
+    --light:#f9fafb;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:var(--light);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--dark);
+}
+
+/* DASHBOARD CARD */
+.dashboard-box{
+    background:#fff;
+    width:100%;
+    max-width:420px;
+    padding:35px 30px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.07);
+    text-align:center;
+}
+
+.dashboard-box h2{
+    margin-bottom:25px;
+}
+
+/* MENU */
+.menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.menu a{
+    display:block;
+    padding:18px;
+    background:#f3f4f6;
+    border-radius:16px;
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:500;
+    transition:.3s;
+}
+
+.menu a:hover{
+    background:var(--primary);
+    color:#fff;
+    transform:translateY(-3px);
+}
+
+/* ======================
+   SUCCESS ANIMATION (SAMA)
+   ====================== */
+#successOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.4s;
+    z-index:999;
+}
+
+#successOverlay.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.success-box{
+    background:#fff;
+    padding:40px 30px;
+    border-radius:20px;
+    text-align:center;
+    width:300px;
+    animation:pop .5s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(.6);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+.checkmark svg{
+    width:80px;
+    height:80px;
+    stroke:var(--primary);
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    fill:none;
+}
+
+.checkmark circle{
+    stroke-dasharray:157;
+    stroke-dashoffset:157;
+    animation:circle .6s forwards;
+}
+
+.checkmark path{
+    stroke-dasharray:48;
+    stroke-dashoffset:48;
+    animation:check .4s .6s forwards;
+}
+
+@keyframes circle{
+    to{stroke-dashoffset:0}
+}
+
+@keyframes check{
+    to{stroke-dashoffset:0}
+}
+
+.success-box h3{
+    margin-top:20px;
+    font-size:20px;
+}
+
+.success-box p{
+    font-size:14px;
+    color:var(--gray);
+    margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard-box">
+    <h2>Dashboard User</h2>
+
+    <div class="menu">
+        <a href="orders.html" onclick="showSuccess(event)">Pesanan</a>
+        <a href="profile.html" onclick="showSuccess(event)">Profil</a>
+    </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div id="successOverlay">
+    <div class="success-box">
+        <div class="checkmark">
+            <svg viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="25"/>
+                <path d="M14 27l7 7 17-17"/>
+            </svg>
+        </div>
+        <h3>Berhasil</h3>
+        <p>Mengarahkan ke halaman</p>
+    </div>
+</div>
+
+<script>
+function showSuccess(e){
+    e.preventDefault();
+    document.getElementById('successOverlay').classList.add('show');
+    const link = e.target.href;
+    setTimeout(()=>window.location.href = link,1200);
+}
+</script>
+
+</body>
+</html>
